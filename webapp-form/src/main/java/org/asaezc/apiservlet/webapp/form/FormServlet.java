@@ -26,10 +26,11 @@ public class FormServlet extends HttpServlet {
         String idioma = req.getParameter("idioma");
         boolean habilitar = req.getParameter("habilitar") != null &&
                 req.getParameter("habilitar").equals("on");
+        //campo hidden form
         String secreto = req.getParameter("secreto");
 
         Map<String, String> errores = new HashMap<>();
-
+        //version superior a java 11 
         if (username == null || username.isBlank()) {
             errores.put("username", "el username es requerido!");
         }
@@ -46,7 +47,7 @@ public class FormServlet extends HttpServlet {
         }
 
         if (lenguajes == null || lenguajes.length == 0) {
-            errores.put("lenguajes", "debe seleccionar al menos un tema.");
+            errores.put("lenguajes", "debe seleccionar al menos un lenguaje.");
         }
         if (roles == null || roles.length == 0) {
             errores.put("roles", "debe seleccionar al menos un role!");
