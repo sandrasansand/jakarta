@@ -1,4 +1,4 @@
-<%@page contentType="UTF-8" import="java.util.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.*"%>
 <%@ page import="asaezc.apiservlet.webapp.jdbc.models.Producto" %>
 <%
 List<Producto> productos = (List<Producto>) request.getAttribute("productos");
