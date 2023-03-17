@@ -1,5 +1,5 @@
 # jakartaEE
-API Servlet
+API Servlet -> https://jakarta.ee/specifications/servlet/5.0/jakarta-servlet-spec-5.0.html#what-is-a-servlet
 
 Requiere:
 jdk > 11
@@ -16,3 +16,6 @@ conector de java para mysql
 8-Migración de las vistas a JSTL, layout, bootstrap, estilos, etc.
 9-Clase Usuarios(modelo) , con sus debidas implementaciones tanto en Servlet, Servicio, como en Repository, modificación del index. Y formularios correspondientes.
 10-Pool de Conexiones. -> https://tomcat.apache.org/tomcat-10.0-doc/jndi-datasource-examples-howto.html#MySQL_DBCP_2_Example
+
+Cdi -> https://jakarta.ee/specifications/cdi/3.0/
+Hibernate -> https://docs.jboss.org/hibernate/orm/6.1/userguide/html_single/Hibernate_User_Guide.html
