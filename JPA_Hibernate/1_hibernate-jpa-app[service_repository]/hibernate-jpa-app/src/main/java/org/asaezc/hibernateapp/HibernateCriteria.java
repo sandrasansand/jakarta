@@ -70,6 +70,14 @@ public class HibernateCriteria {
 
         query = criteria.createQuery(Cliente.class);
         from = query.from(Cliente.class);
+        query.select(from).where(from.get("nombre").in("Sandra","Antonio","Luisa"));
+       // query.select(from).where(from.get("nombre").in(Arrays.asList("Sandra","Antonio","Luisa")));
+        clientes = em.createQuery(query).getResultList();
+        clientes.forEach(System.out::println);
+
+        //la misma consulta anterior con ParameterExpression
+        query = criteria.createQuery(Cliente.class);
+        from = query.from(Cliente.class);
         ParameterExpression<List> listParam = criteria.parameter(List.class, "nombres");
         query.select(from).where(from.get("nombre").in(listParam));
         clientes = em.createQuery(query)
@@ -98,6 +106,7 @@ public class HibernateCriteria {
         Predicate porNombre = criteria.equal(from.get("nombre"), "Sandra");
         Predicate porFormaPago = criteria.equal(from.get("formaPago"), "Débito");
         Predicate p3 = criteria.ge(from.get("id"), 4L);
+        //Predicate p4 = criteria.le(from.get("id"), 2L);
         query.select(from).where(criteria.and(p3, criteria.or(porNombre, porFormaPago)));
         clientes = em.createQuery(query).getResultList();
         clientes.forEach(System.out::println);
@@ -106,8 +115,15 @@ public class HibernateCriteria {
 
         query = criteria.createQuery(Cliente.class);
         from = query.from(Cliente.class);
+        //asc
+        query.select(from).orderBy(criteria.asc(from.get("nombre")), criteria.asc(from.get("apellido")));
+        clientes = em.createQuery(query).getResultList();
+        clientes.forEach(System.out::println);
 
-        query.select(from).orderBy(criteria.asc(from.get("nombre")), criteria.desc(from.get("apellido")));
+        query = criteria.createQuery(Cliente.class);
+        from = query.from(Cliente.class);
+        //desc
+        query.select(from).orderBy(criteria.desc(from.get("nombre")), criteria.desc(from.get("apellido")));
         clientes = em.createQuery(query).getResultList();
         clientes.forEach(System.out::println);
 
@@ -124,9 +140,12 @@ public class HibernateCriteria {
         System.out.println(cliente);
 
         System.out.println("========== consulta sólo el nombre de los clientes ==========");
+        //consulta por nombres reutilización en las siguientes
         CriteriaQuery<String> queryString = criteria.createQuery(String.class);
+
         from = queryString.from(Cliente.class);
         queryString.select(from.get("nombre"));
+
         List<String> nombres = em.createQuery(queryString).getResultList();
         nombres.forEach(System.out::println);
 
@@ -149,14 +168,19 @@ public class HibernateCriteria {
         queryString = criteria.createQuery(String.class);
         from = queryString.from(Cliente.class);
 
-        queryString.select(criteria.upper(criteria.concat(criteria.concat(from.get("nombre"), " "), from.get("apellido"))));
+        queryString.select(criteria.upper(criteria.concat(criteria.concat(from.get("nombre"), " "),  from.get("apellido"))));
         nombres = em.createQuery(queryString).getResultList();
         nombres.forEach(System.out::println);
 
         System.out.println("========== consulta de campos personalizados del entity cliente ============");
+        //nueva consulta de tipo Object que reutilizamos en las siguientes
         CriteriaQuery<Object[]> queryObject = criteria.createQuery(Object[].class);
+        query.select(from).orderBy(criteria.desc(from.get("nombre")), criteria.desc(from.get("apellido")));
+
         from = queryObject.from(Cliente.class);
-        queryObject.multiselect(from.get("id"), from.get("nombre"), from.get("apellido"));
+        //multiselect varios campos de devolución de la consulta y orden ascendente por nombre
+        queryObject.multiselect(from.get("id"), from.get("nombre"), from.get("apellido")).orderBy(criteria.asc(from.get("nombre")));
+
         List<Object[]> registros = em.createQuery(queryObject).getResultList();
         registros.forEach(reg -> {
             Long id = (Long) reg[0];
