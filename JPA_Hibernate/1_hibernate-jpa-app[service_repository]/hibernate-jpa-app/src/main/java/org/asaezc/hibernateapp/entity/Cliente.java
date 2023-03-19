@@ -2,8 +2,10 @@ package org.asaezc.hibernateapp.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name="clientes")
+@Table(name = "clientes")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,8 +14,11 @@ public class Cliente {
     private String nombre;
     private String apellido;
 
-    @Column(name="forma_pago")
+    @Column(name = "forma_pago")
     private String formaPago;
+    @Embedded
+    private Auditoria audit = new Auditoria();
+
 
     public Cliente() {
     }
@@ -29,6 +34,7 @@ public class Cliente {
         this.apellido = apellido;
         this.formaPago = formaPago;
     }
+
 
     public Long getId() {
         return id;
@@ -62,11 +68,18 @@ public class Cliente {
         this.formaPago = formaPago;
     }
 
+
+
     @Override
     public String toString() {
+        //validación de fechas null exception
+        LocalDateTime creado = this.audit != null? audit.getCreadoEn():null;
+        LocalDateTime editado = this.audit != null? audit.getEditadoEn(): null;
         return "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", formaPago='" + formaPago + '\'' ;
+                ", formaPago='" + formaPago + '\'' +
+                ", CreadoEn='" + creado + '\'' +
+                ", EditadoEn='" + editado + '\'';
     }
 }
