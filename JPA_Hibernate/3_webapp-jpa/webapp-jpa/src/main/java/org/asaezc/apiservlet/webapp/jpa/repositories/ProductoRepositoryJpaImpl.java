@@ -16,6 +16,7 @@ public class ProductoRepositoryJpaImpl implements CrudRepository<Producto>{
 
     @Override
     public List<Producto> listar() throws Exception {
+	//optimización sql
         return em.createQuery("select p from Producto p left outer join fetch p.categoria", Producto.class).getResultList();
     }
 
