@@ -15,9 +15,10 @@ public class HibernateFetchManyToOneCriteria {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Factura> query = cb.createQuery(Factura.class);
         Root<Factura> factura = query.from(Factura.class);
+	  //Fetch
         Join<Factura, Cliente> cliente = (Join) factura.fetch("cliente", JoinType.LEFT);
         cliente.fetch("detalle", JoinType.LEFT);
-
+	  //condición
         query.select(factura).where(cb.equal(cliente.get("id"), 1L));
         List<Factura> facturas = em.createQuery(query).getResultList();
         facturas.forEach(f-> System.out.println(f.getDescripcion() + ", cliente: " + f.getCliente().getNombre()));
