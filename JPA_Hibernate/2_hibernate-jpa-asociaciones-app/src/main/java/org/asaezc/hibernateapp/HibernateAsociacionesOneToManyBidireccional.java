@@ -7,31 +7,32 @@ import org.asaezc.hibernateapp.util.JpaUtil;
 
 public class HibernateAsociacionesOneToManyBidireccional {
     public static void main(String[] args) {
-
         EntityManager em = JpaUtil.getEntityManager();
+
         try {
 
             em.getTransaction().begin();
+            Cliente cliente = new Cliente("Sara","Gómez");
+            cliente.setFormaPago("Crédito");
 
-            Cliente cliente = new Cliente("Cata", "Edu");
-            cliente.setFormaPago("paypal");
+            Factura f1 = new Factura("Gastos transporte", 568L);
+            Factura f2 = new Factura("Gastos oficina", 1525L);
 
-            Factura f1 = new Factura("compras de supermercado", 5000L);
-            Factura f2 = new Factura("compras de tecnologia", 7000L);
-            cliente.addFactura(f1)
-                    .addFactura(f2);
-
+/*            //rel 1:n
+            cliente.getFacturas().add(f1);
+            cliente.getFacturas().add(f2);
+            //rel n:1
+            f1.setCliente(cliente);
+            f2.setCliente(cliente);
+*/
+            //lo mismo anterior pero con método implementado en la clase cliente
+            cliente.addFactura(f1).addFactura(f2);
+            //presistencia
             em.persist(cliente);
             em.getTransaction().commit();
             System.out.println(cliente);
+            
 
-            em.getTransaction().begin();
-            // Factura f3 = em.find(Factura.class, 1L);
-            Factura f3 = new Factura("compras de supermercado", 5000L);
-            f3.setId(1L);
-            cliente.removeFactura(f3);
-            em.getTransaction().commit();
-            System.out.println(cliente);
         } catch (Exception e) {
             em.getTransaction().rollback();
             e.printStackTrace();
