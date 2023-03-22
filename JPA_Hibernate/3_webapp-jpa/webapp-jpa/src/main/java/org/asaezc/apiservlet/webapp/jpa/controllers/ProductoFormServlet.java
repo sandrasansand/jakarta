@@ -95,6 +95,7 @@ public class ProductoFormServlet extends HttpServlet {
         } catch (DateTimeParseException e) {
             fecha = null;
         }
+	  //Wrapper
         Long id;
         try {
             id = Long.valueOf(req.getParameter("id"));
