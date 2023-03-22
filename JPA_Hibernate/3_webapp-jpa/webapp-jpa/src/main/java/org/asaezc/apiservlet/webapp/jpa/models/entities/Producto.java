@@ -12,7 +12,7 @@ public class Producto {
     private Long id;
 
     private String nombre;
-
+	//uso si invocamos por método
     @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
