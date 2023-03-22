@@ -45,6 +45,7 @@ public class ProducerResources {
         log.info("cerrando la conexion a la bbdd mysql!");
     }
 
+    //para cada req
     @Produces
     @RequestScoped
     private EntityManager beanEntityManager() {
