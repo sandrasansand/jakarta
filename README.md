@@ -20,6 +20,6 @@ conector de java para mysql
 Cdi -> https://jakarta.ee/specifications/cdi/3.0/
 Hibernate -> https://docs.jboss.org/hibernate/orm/6.1/userguide/html_single/Hibernate_User_Guide.html
 
-Java Server Faces
+Java Server Faces-> https://jakarta.ee/specifications/faces/3.0/vdldoc/
 wildfly -> https://www.wildfly.org/downloads/
 primefaces ->https://primefaces.github.io/primefaces/12_0_0/#/gettingstarted/dependencies
