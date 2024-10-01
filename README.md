@@ -23,3 +23,5 @@ Hibernate -> https://docs.jboss.org/hibernate/orm/6.1/userguide/html_single/Hibe
 Java Server Faces-> https://jakarta.ee/specifications/faces/3.0/vdldoc/
 wildfly -> https://www.wildfly.org/downloads/
 primefaces ->https://primefaces.github.io/primefaces/12_0_0/#/gettingstarted/dependencies
+
+JAX-RS -> uso de https://www.wildfly.org/news/2023/03/09/WildFly-Maven-Plugin/ 
